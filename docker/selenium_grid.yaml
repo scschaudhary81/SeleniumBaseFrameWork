@@ -1,0 +1,20 @@
+services:
+  selenium-hub:
+    image: selenium/hub:4.38.0
+    ports:
+      - "4444"
+      - "4443"
+      - "4442"
+    environment:
+      - GRID_MAX_SESSION=20
+      - GRID_BROWSER_TIMEOUT=300
+      - GRID_TIMEOUT=300
+  selenium-node:
+    image: selenium/node-chrome:139.0-20251025
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=3
