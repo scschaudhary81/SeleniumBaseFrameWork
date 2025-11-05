@@ -28,7 +28,7 @@ sleep 10
 DOCKER_PORT=$(docker port "${PROJECT_NAME}-selenium-hub-1" 4444/tcp | awk -F':' '{print $2}')
 
 echo "$DOCKER_PORT"
-ENV_NAME="${PROJECT_NAME}_hub_port"
+ENV_NAME="SEL_HUB_PORT"
 export "$ENV_NAME"="$DOCKER_PORT"
 
 

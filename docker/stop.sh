@@ -1,7 +1,7 @@
 project_name=$1
 
 if [ -z "${project_name}" ]; then
-  echo "Please Provide a valid project name used to start selenium grid"
+  echo "Parameter 1 Error : Please Provide a valid project name used to stop selenium grid"
   exit 1
 fi
 
