@@ -64,7 +64,7 @@ public class BaseTest{
                 }
                 return options;
             default:
-                throw new Exception("Invalid or unsupported Browser type");
+                throw new Exception("Error: Invalid or Unsupported Browser Type : " + browser_type);
         }
     }
 
@@ -86,7 +86,7 @@ public class BaseTest{
                 this.driver.set(local_driver);
                 break;
             default:
-                throw new Exception("Error: Invalid Browser Type");
+                throw new Exception("Error: Invalid or Unsupported Browser Type : " + browser_type);
         }
     }
 
