@@ -1,0 +1,13 @@
+<suite name="Test">
+    <test name = "">
+        <classes>
+            <class name="">
+                <method>
+
+                </method>
+            </class>
+        </classes>
+    </test>
+</suite>
+
+

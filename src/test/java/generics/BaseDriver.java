@@ -3,6 +3,8 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.annotations.*;
@@ -12,10 +14,15 @@ import java.time.Duration;
 import java.util.Properties;
 
 
-public class BaseTest{
+public class BaseDriver {
+    
+
+
 
     private final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private final ThreadLocal<FluentWait<WebDriver>> wait = new ThreadLocal<>();
+    private final ThreadLocal<Actions> actions = new ThreadLocal<>();
+    private final ThreadLocal<DevTools> devtools = new ThreadLocal<>();
     private final Properties properties  = new Properties();
 
 
@@ -48,6 +55,25 @@ public class BaseTest{
 
     public String getProperty(String name){
         return this.properties.getProperty(name);
+    }
+
+    public Actions get_actions(){
+        return actions.get();
+    }
+
+    private void set_actions(){
+          if(getDriver() != null) this.actions.set(new Actions(this.getDriver()));
+          else this.log_step_error("Error: Not able to set actions object as driver is null");
+    }
+
+
+    private void set_dev_tools(){
+        DevTools devTools = ((ChromeDriver)this.getDriver()).getDevTools();
+        this.devtools.set(devTools);
+    }
+
+    public DevTools get_dev_tools(){
+        return this.devtools.get();
     }
 
 
@@ -126,6 +152,8 @@ public class BaseTest{
             if(run_env == null) run_env = this.getProperty("RUN_ENV");
             this.start_driver(browser_type,run_env);
             this.set_up_wait();
+            this.set_actions();
+            this.set_dev_tools();
         }catch (Exception e){
             this.log_step_error(String.format("Failed to start driver due to %s",e));
         }
