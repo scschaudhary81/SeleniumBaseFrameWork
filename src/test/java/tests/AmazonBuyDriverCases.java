@@ -1,24 +1,17 @@
 package tests;
 
-import generics.BaseDriver;
 import generics.BaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.*;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.AmazonPage;
-
-import java.util.List;
+import pages.AmazonPageFactory;
 
 public class AmazonBuyDriverCases extends BaseTest {
 
-    AmazonPage page;
+    AmazonPageFactory page;
 
     @BeforeMethod
     public void before_method(){
-        page = new AmazonPage(this.getDriver());
+        page = new AmazonPageFactory(this.getDriver());
     }
 
     @Test(priority = -1)

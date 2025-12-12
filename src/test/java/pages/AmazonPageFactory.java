@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class AmazonPage{
+public class AmazonPageFactory {
 
     @FindBy(xpath = "//input[@id='twotabsearchtextbox']")
     public WebElement searchBoxHome;
@@ -15,7 +15,7 @@ public class AmazonPage{
     @FindBy(xpath = "//span[text()='Up to 5% back with Amazon Pay ICICI card']/ancestor::div[@class='a-section a-spacing-small a-spacing-top-small']//h2")
     public List<WebElement> get_all_five_percent_product;
 
-    public AmazonPage(WebDriver driver){
+    public AmazonPageFactory(WebDriver driver){
         PageFactory.initElements(driver,this);
     }
 }
